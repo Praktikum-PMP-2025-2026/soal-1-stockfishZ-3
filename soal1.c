@@ -11,7 +11,7 @@ void check(char *st){
     for (int i = 0; i < lastidx; i++){
         if (st[i] == '('){
             if (lastidxfound == 0){
-                for (int j = strlen(st); j > i; j--){
+                for (int j = strlen(st); j >= i; j--){
                     if (st[j] == '('){
                         memmove(&st[j], &st[j + 1], strlen(st) - j);
                     }else if (st[j] == ')'){
@@ -22,7 +22,7 @@ void check(char *st){
                 }
             }else{
                 int j = lastidx;
-                while (j != i){
+                while (j > i){
                     j--;
                     if (st[j] == '('){
                         memmove(&st[j], &st[j + 1], strlen(st) - j);
