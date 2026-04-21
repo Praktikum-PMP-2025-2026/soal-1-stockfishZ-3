@@ -6,28 +6,33 @@
 #include <string.h>
 
 void check(char *st){
-    for (int i = 0; i < strlen(st)/2; i++){
-        int found = 0;
+    int lastidx = strlen(st);
+    int lastidxfound = 0;
+    for (int i = 0; i < strlen(st); i++){
         if (st[i] == '('){
-            for (int j = i+1; j < strlen(st); j++){
-                if (found != 1){
+            if (lastidxfound == 0){
+                for (int j = strlen(st); j > i; j--){
                     if (st[j] == '('){
                         memmove(&st[j], &st[j + 1], strlen(st) - j);
                     }else if (st[j] == ')'){
-                        found = 1;
-                    }
-                }else{
-                    if (st[j] == '('){
+                        lastidxfound = 1;
+                        lastidx = j;
                         break;
-                    }else if (st[j] == ')'){
+                    }
+                }
+            }else{
+                int j = lastidx;
+                while (j != i){
+                    j--;
+                    if (st[j] == '('){
                         memmove(&st[j], &st[j + 1], strlen(st) - j);
+                    }else if (st[j] == ')'){
+                        lastidx = j;
+                        break;
                     }
                 }
             }
-            if (found ==  0){
-                memmove(&st[i], &st[i + 1], strlen(st) - i);
-            }
-        }else if (st[i] == ')'){
+        }else if (st[i] == ')' && i < lastidx){
             memmove(&st[i], &st[i + 1], strlen(st) - i);
         }
     }
@@ -35,6 +40,7 @@ void check(char *st){
 
 int main(){
     char st[100];
+
     fgets(st, sizeof(st), stdin);
     check(st);
     printf("%s", st);
