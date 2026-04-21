@@ -6,7 +6,7 @@
 #include <string.h>
 
 void check(char *st){
-    for (int i = 0; i < strlen(st)/2; i++){
+    for (int i = 0; i < strlen(st); i++){
         int found = 0;
         if (st[i] == '('){
             for (int j = i+1; j < strlen(st); j++){
