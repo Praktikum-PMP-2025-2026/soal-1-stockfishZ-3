@@ -33,9 +33,6 @@ void check(char *st){
                 }
             }
         }else if (st[i] == ')' && i < lastidx-1){
-            printf("%d\n", i);
-            printf("%d\n", lastidx);
-            printf("wow\n");
             memmove(&st[i], &st[i + 1], strlen(st) - i);
         }
     }
