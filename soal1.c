@@ -8,7 +8,7 @@
 void check(char *st){
     int lastidx = strlen(st);
     int lastidxfound = 0;
-    for (int i = 0; i < strlen(st); i++){
+    for (int i = 0; i < lastidx; i++){
         if (st[i] == '('){
             if (lastidxfound == 0){
                 for (int j = strlen(st); j > i; j--){
@@ -32,7 +32,10 @@ void check(char *st){
                     }
                 }
             }
-        }else if (st[i] == ')' && i < lastidx){
+        }else if (st[i] == ')' && i < lastidx-1){
+            printf("%d\n", i);
+            printf("%d\n", lastidx);
+            printf("wow\n");
             memmove(&st[i], &st[i + 1], strlen(st) - i);
         }
     }
